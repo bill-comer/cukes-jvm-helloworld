@@ -1,0 +1,9 @@
+The src & test code here is taken directly from https://github.com/cucumber/cucumber-jvm
+
+What I wanted to do here is create it as a standalone java project without using maven so I had full control & could see what I needed.
+
+Included in here is the .classpath & .project files for eclipse.
+
+I am currently using STS 2.9 variant of eclipse
+
+The jars are pulled in using ivy which I prefer over maven.
