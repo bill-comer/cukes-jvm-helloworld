@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<project name="cukes-hw" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<property environment="env" />
+
+	<property name="project.base.dir" value="." />
+	<property name="test.lib.dir" value="${project.base.dir}/test/lib" />
+
+  <property name="test.classes.dir.dev" value="test/classes" />
+  <property name="src.classes.dir" value="classes" />
+
+  <property name="browser" location="C:/Program Files/Internet Explorer/iexplore.exe"/>
+  <property name="file" location="target/cucumber/index.html"/>
+
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+
+	<path id="test.cukes.compile.classpath">
+		<pathelement path=".;..;" />
+		<!--
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		-->
+		<fileset dir="${test.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<pathelement path="${test.classes.dir.dev}" />
+		<pathelement path="${src.classes.dir}" />
+	</path>
+
+	<target name="resolve" depends="" description="Resolve the dependencies">
+		<property name="ivy.default.ivy.user.dir" value="C:/ivy/masterStore" />
+		<ivy:retrieve pattern="${test.lib.dir}/[artifact]-[revision](-[classifier]).[ext]" conf="test" />
+		<ivy:retrieve pattern="${ivy.lib.dir}/[artifact]-[revision](-[classifier]).[ext]" conf="build" />
+		<ivy:retrieve pattern="[conf]/[artifact]-[revision](-[classifier]).[ext]" conf="sources" />
+		<ivy:retrieve pattern="[conf]/[artifact]-[revision](-[classifier]).[ext]" conf="javadoc" />
+		<ivy:retrieve pattern="[conf]/[artifact]-[revision](-[classifier]).[ext]" conf="dbgen" />
+		<ivy:retrieve pattern="${cobertura.lib.dir}/[artifact]-[revision](-[classifier]).[ext]" conf="coberturalib" />
+	</target>
+
+
+	<target name="runcukes" depends="">
+		<java classname="cucumber.cli.Main" fork="true" >
+			<classpath refid="test.cukes.compile.classpath"/>
+			<arg value="--format"/>
+			<arg value="html:target/cucumber"/>
+			<arg value="--glue"/>
+			<arg value="cucumber.examples.java.helloworld"/>
+			<arg value="test/src"/>
+		</java>
+
+		<exec executable="${browser}" spawn="true">
+			<arg value="${file}"/>
+		</exec>
+
+	</target>
+
+</project>

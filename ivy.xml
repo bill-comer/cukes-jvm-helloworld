@@ -1,0 +1,27 @@
+<ivy-module version="2.0">
+  <info organisation="Utilisoft" module="cukes-hw" />
+  
+  <configurations defaultconfmapping="runtime->*">
+    <conf name="build" />
+    <conf name="compile" />
+    <conf name="test"/>
+    <conf name="sources" />
+    <conf name="javadoc" />
+    <conf name="dbgen" />
+    <conf name="coberturalib" />
+  </configurations>
+
+  <dependencies>
+   <!-- 
+    -->
+    <dependency org="junit" name="junit" rev="4.6" transitive="false" conf="test->default;sources->sources;javadoc->javadoc" />
+    <dependency org="junit-addons" name="junit-addons" rev="1.4" transitive="false" conf="test->default;sources->sources;javadoc->javadoc" />
+    
+    <dependency org="info.cukes" name="cucumber-core" transitive="true" rev="${info.cukes.version}" conf="test->default;sources->sources;javadoc->javadoc"/>
+    <dependency org="info.cukes" name="cucumber-java" transitive="true" rev="${info.cukes.version}" conf="test->default;sources->sources;javadoc->javadoc"/>
+    <dependency org="info.cukes" name="cucumber-junit" transitive="true" rev="${info.cukes.version}" conf="test->default;sources->sources;javadoc->javadoc"/>
+    <dependency org="com.thoughtworks.xstream" name="xstream" transitive="true" rev="1.4.2" conf="test->default;sources->sources;javadoc->javadoc"/>
+    
+  </dependencies>
+  
+</ivy-module>
